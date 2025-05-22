@@ -1,4 +1,3 @@
-import fileDialog from 'file-dialog';
 import { BrunoError } from 'utils/common/error';
 import { safeParseJSON } from 'utils/common/index';
 
