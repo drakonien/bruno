@@ -28,6 +28,15 @@ const { postmanToBrunoEnvironment } = require('@usebruno/converters');
 const brunoEnvironment = postmanToBrunoEnvironment(postmanEnvironment);
 ```
 
+### Convert Thunder Client collection to Bruno collection
+
+```javascript
+const { thunderClientToBruno } = require('@usebruno/converters');
+
+// Convert Thunder Client collection to Bruno collection
+const brunoCollection = thunderClientToBruno(thunderclientCollection);
+```
+
 ### Convert Insomnia collection to Bruno collection
 
 ```javascript
@@ -44,7 +53,7 @@ import { openApiToBruno } from '@usebruno/converters';
 const brunoCollection = openApiToBruno(openApiSpecification);
 ```
 
-## Example 
+## Example
 
 ```bash copy
 
@@ -75,4 +84,4 @@ const outputFilePath = path.resolve(__dirname, 'bruno-collection.json');
 
 convertPostmanToBruno(inputFilePath, outputFilePath);
 
-``` 
+```

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { IconLoader2 } from '@tabler/icons';
 import importBrunoCollection from 'utils/importers/bruno-collection';
 import { postmanToBruno, readFile } from 'utils/importers/postman-collection';
+import importThunderClientCollection from 'utils/importers/thunderclient-collection';
 import importInsomniaCollection from 'utils/importers/insomnia-collection';
 import importOpenapiCollection from 'utils/importers/openapi-collection';
 import { toastError } from 'utils/common/error';
@@ -19,7 +20,6 @@ const ImportCollection = ({ onClose, handleSubmit }) => {
       .catch((err) => toastError(err, 'Import collection failed'))
   };
 
-
   const handleImportPostmanCollection = () => {
     fileDialog({ accept: 'application/json' })
       .then((...args) => {
@@ -30,6 +30,15 @@ const ImportCollection = ({ onClose, handleSubmit }) => {
       .then((collection) => handleSubmit({ collection }))
       .catch((err) => toastError(err, 'Postman Import collection failed'))
       .finally(() => setIsLoading(false));
+  }
+
+  const handleImportThunderClientCollection = () => {
+    console.log("handleImportThunderClientCollection");
+    importThunderClientCollection()
+      .then(({ collection }) => {
+        handleSubmit({ collection });
+      })
+      .catch((err) => toastError(err, 'Thunder Client Import collection failed'))
   }
 
   const handleImportInsomniaCollection = () => {
@@ -73,7 +82,6 @@ const ImportCollection = ({ onClose, handleSubmit }) => {
       'Almost done...'
     ];
     
-    
     // Cycle through loading messages for better UX
     useEffect(() => {
       if (!isLoading) return;
@@ -114,6 +122,7 @@ const ImportCollection = ({ onClose, handleSubmit }) => {
             <div className="mt-4 grid grid-rows-2 grid-flow-col gap-2">
               <CollectionButton onClick={handleImportBrunoCollection}>Bruno Collection</CollectionButton>
               <CollectionButton onClick={handleImportPostmanCollection}>Postman Collection</CollectionButton>
+              <CollectionButton onClick={handleImportThunderClientCollection}>Thunder Client Collection</CollectionButton>
               <CollectionButton onClick={handleImportInsomniaCollection}>Insomnia Collection</CollectionButton>
               <CollectionButton onClick={handleImportOpenapiCollection}>OpenAPI V3 Spec</CollectionButton>
             </div>
